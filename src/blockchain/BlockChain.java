@@ -1,19 +1,22 @@
 package blockchain;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.io.Serializable;
+import java.util.*;
 
-public class BlockChain {
+public class BlockChain implements Serializable {
+    private static final long serialVersionUID = 3812017177088226528L;
 
     private final Random random = new Random();
     private final int zeroStart;
     private final List<Block> blockchain;
 
-    public BlockChain(int zeroStart, List<Block> blockchain) {;
-        this.zeroStart = zeroStart;
-        this.blockchain = blockchain;
+    public BlockChain() {
+        this.zeroStart = 1;
+        this.blockchain = new LinkedList<>();
+    }
+
+    public List<Block> getBlockchain() {
+        return Collections.unmodifiableList(blockchain);
     }
 
     public void addBlockToBlockChain(Block block) {

@@ -1,6 +1,9 @@
 package blockchain;
 
-public class Block {
+import java.io.Serializable;
+
+public class Block implements Serializable {
+    private static final long serialVersionUID = 3812017177098226528L;
 
     private final long id;
     private final long timeStamp;

@@ -6,14 +6,12 @@ public class Block {
     private final long timeStamp;
     private final int magicNumber;
     private final String hashPrevious;
-    private final String hashCurrent;
 
-    public Block(long id, long timeStamp, int magicNumber, String hashPrevious, String hashCurrent) {
+    public Block(long id, long timeStamp, int magicNumber, String hashPrevious) {
         this.id = id;
         this.timeStamp = timeStamp;
         this.magicNumber = magicNumber;
         this.hashPrevious = hashPrevious;
-        this.hashCurrent = hashCurrent;
     }
 
     public long getId() {
@@ -33,7 +31,8 @@ public class Block {
     }
 
     public String getHashCurrent() {
-        return hashCurrent;
+        return StringUtil.applySha256(
+                id + timeStamp + magicNumber + hashPrevious);
     }
 
     @Override
@@ -43,6 +42,6 @@ public class Block {
                 "Timestamp: " + timeStamp + "\n" +
                 "Magic number:" + magicNumber + "\n" +
                 "Hash of the previous block:\n" + hashPrevious + '\n' +
-                "Hash of the block:\n" + hashCurrent;
+                "Hash of the block:\n" + getHashCurrent();
     }
 }

@@ -1,5 +1,7 @@
 package blockchain;
 
+import blockchain.utils.StringUtil;
+
 import java.io.Serializable;
 import java.util.*;
 

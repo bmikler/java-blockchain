@@ -1,4 +1,6 @@
-package blockchain;
+package blockchain.utils;
+
+import blockchain.BlockChain;
 
 import java.io.*;
 import java.util.Optional;

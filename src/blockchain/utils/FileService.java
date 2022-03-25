@@ -24,10 +24,11 @@ public class FileService {
                 ) {
 
             BlockChain blockChain = (BlockChain) ois.readObject();
+            System.out.println("Blockchain loaded.");
             return Optional.of(blockChain);
 
         } catch (IOException | ClassNotFoundException e) {
-            //System.err.println("File not found. Creating new blockchain.");
+            System.err.println("Creating new blockchain....");
             return Optional.empty();
         }
 

@@ -2,6 +2,7 @@ package blockchain.mining;
 
 import blockchain.Block;
 import blockchain.BlockChain;
+import blockchain.IncorectBlockException;
 import blockchain.utils.StringUtil;
 
 import java.util.Date;
@@ -20,36 +21,44 @@ public class Miner extends Thread{
 
     @Override
     public void run() {
-        while (blockChain.getBlockchain().size() < 6){
+        while (blockChain.getSize() < 1000){
             Block block = generateNewBlock();
-            blockChain.addBlockToBlockChain(block);
+            
+            try {
+                blockChain.addBlockToBlockChain(block);
+            } catch (IncorectBlockException e) {
+                System.err.println("Incorrect block. Somebody was faster");
+            }
         }
     }
 
     public Block generateNewBlock() {
-        long id = blockChain.getLastId() + 1;
-        String hashPrevious = blockChain.getLastHash();
 
-        long timeStamp = new Date().getTime();
+        long id;
+        long timeStamp;
+        int magicNumber;
+        String lastHash;
 
-        int magicNumber = findMagicNumber(id, timeStamp, hashPrevious);
-
-        return new Block(id, this.id, timeStamp, magicNumber, hashPrevious);
-    }
-
-    private int findMagicNumber(long id, long timestamp, String hashPrevious) {
+        int zeroStart;
 
         Random random = new Random();
-        int magicNumber;
+
         String hashCurrent;
 
         do {
+            id = blockChain.getLastId() + 1;
+            timeStamp = new Date().getTime();
             magicNumber = random.nextInt();
-            hashCurrent = StringUtil.applySha256(
-                    id + timestamp + magicNumber + hashPrevious);
-        } while (!hashCurrent.startsWith("0".repeat(blockChain.getZeroStart())));
+            lastHash = blockChain.getLastHash();
 
-        return magicNumber;
+            zeroStart = blockChain.getZeroStart();
+
+            hashCurrent = StringUtil.applySha256(id+ timeStamp + magicNumber + lastHash);
+
+        } while (!hashCurrent.startsWith("0".repeat(zeroStart)));
+
+        return new Block(id, this.id, timeStamp, magicNumber, lastHash);
     }
+
 
 }

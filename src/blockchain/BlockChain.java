@@ -1,5 +1,6 @@
 package blockchain;
 
+import blockchain.mining.Miner;
 import blockchain.utils.FileService;
 import blockchain.utils.StringUtil;
 
@@ -10,39 +11,32 @@ public class BlockChain implements Serializable {
     private static final long serialVersionUID = 3812017177088226528L;
 
     private static final BlockChain INSTANCE = FileService.loadBlockChain().orElse(new BlockChain());
-    private final List<Block> blockchain;
-    private int zeroStart;
-    private long timer;
+    private final List<Block> blockchain = new LinkedList<>();
+    private int zeroStart = 1;
+    private long timer = System.currentTimeMillis();
 
-    private BlockChain() {
-        this.zeroStart = 1;
-        this.blockchain = new LinkedList<>();
-        this.timer = System.currentTimeMillis();
-    }
+    private final Set<Miner> miners = new HashSet<>();
 
     public static BlockChain getInstance() {
         return INSTANCE;
     }
 
-    public List<Block> getBlockchain() {
-        return Collections.unmodifiableList(blockchain);
+    public int getSize() {
+        return blockchain.size();
     }
 
     public int getZeroStart() {
         return zeroStart;
     }
 
-    public void print() {
-        blockchain.forEach(System.out::println);
-    }
-
-    public void addBlockToBlockChain(Block block) {
+    public synchronized void addBlockToBlockChain(Block block) {
 
         if(!isBlockValid(block)) {
             throw new IncorectBlockException();
         }
-        System.out.println(block);
+
         blockchain.add(block);
+        System.out.println(block);
 
         long tmp = System.currentTimeMillis();
         long time = (tmp - timer) / 1000;

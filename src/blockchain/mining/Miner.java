@@ -21,13 +21,13 @@ public class Miner extends Thread{
 
     @Override
     public void run() {
-        while (blockChain.getSize() < 1000){
+        while (blockChain.getSize() < 100){
             Block block = generateNewBlock();
-            
+
             try {
                 blockChain.addBlockToBlockChain(block);
             } catch (IncorectBlockException e) {
-                System.err.println("Incorrect block. Somebody was faster");
+                System.err.println("Miner: " + id + " Incorrect block. Somebody was faster");
             }
         }
     }

@@ -15,8 +15,6 @@ public class BlockChain implements Serializable {
     private int zeroStart = 1;
     private long timer = System.currentTimeMillis();
 
-    private final Set<Miner> miners = new HashSet<>();
-
     public static BlockChain getInstance() {
         return INSTANCE;
     }
@@ -60,15 +58,15 @@ public class BlockChain implements Serializable {
         save();
     }
 
-    private void save() {
-        FileService.saveBlockchain(INSTANCE);
-    }
-
     private Boolean isBlockValid(Block block) {
 
         return getLastHash().equals(block.getHashPrevious())
                 && block.getHashCurrent().startsWith("0".repeat(zeroStart));
 
+    }
+
+    private void save() {
+        FileService.saveBlockchain(INSTANCE);
     }
 
     public String getLastHash() {

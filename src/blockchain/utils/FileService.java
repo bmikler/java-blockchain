@@ -27,7 +27,7 @@ public class FileService {
             return Optional.of(blockChain);
 
         } catch (IOException | ClassNotFoundException e) {
-            System.err.println("File not found. Creating new blockchain.");
+            //System.err.println("File not found. Creating new blockchain.");
             return Optional.empty();
         }
 

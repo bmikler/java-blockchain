@@ -29,7 +29,7 @@
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">0</div>
+<div class="counter">1</div>
 <p>failures</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.316s</div>
+<div class="counter">0.066s</div>
 <p>duration</p>
 </div>
 </td>
@@ -50,8 +50,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox success" id="successRate">
-<div class="percent">100%</div>
+<div class="infoBox failures" id="successRate">
+<div class="percent">0%</div>
 <p>successful</p>
 </div>
 </td>
@@ -61,13 +61,71 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Tests</a>
+<a href="#tab0">Failed tests</a>
 </li>
 <li>
-<a href="#tab1">Standard output</a>
+<a href="#tab1">Tests</a>
+</li>
+<li>
+<a href="#tab2">Standard output</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
+<h2>Failed tests</h2>
+<div class="test">
+<a name="start"></a>
+<h3 class="failures">start</h3>
+<span class="code">
+<pre>java.lang.AssertionError: Wrong answer in test #1
+
+You should output 5 blocks, found 0
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:155)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:110)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:38)
+	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at jdk.proxy1/jdk.proxy1.$Proxy2.processTestClass(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:133)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+</pre>
+</span>
+</div>
+</div>
+<div id="tab1" class="tab">
 <h2>Tests</h2>
 <table>
 <thead>
@@ -78,339 +136,17 @@
 </tr>
 </thead>
 <tr>
-<td class="success">start</td>
-<td class="success">0.316s</td>
-<td class="success">passed</td>
+<td class="failures">start</td>
+<td class="failures">0.066s</td>
+<td class="failures">failed</td>
 </tr>
 </table>
 </div>
-<div id="tab1" class="tab">
+<div id="tab2" class="tab">
 <h2>Standard output</h2>
 <span class="code">
 <pre>?[1;31m
 Start test 1?[0m
-Enter how many zeros the hash must start with: 
-&gt; 0
-
-Block:
-Id: 1
-Timestamp: 1648038375223
-Magic number:-1551185059
-Hash of the previous block:
-0
-Hash of the block:
-45a03e899d1bae15333160065f18b65f8fac777e3df9fe41a7567fcc3ffd6833
-Block was generating for 0 seconds
-
-Block:
-Id: 2
-Timestamp: 1648038375245
-Magic number:-1538355593
-Hash of the previous block:
-45a03e899d1bae15333160065f18b65f8fac777e3df9fe41a7567fcc3ffd6833
-Hash of the block:
-1ece6d169c70002edec57397eaa84027b5aa5e64d986cbb94b385b930654d30a
-Block was generating for 0 seconds
-
-Block:
-Id: 3
-Timestamp: 1648038375251
-Magic number:1481504915
-Hash of the previous block:
-1ece6d169c70002edec57397eaa84027b5aa5e64d986cbb94b385b930654d30a
-Hash of the block:
-4752a491306161aad693799737cf5a36dc12f75c278257232a738bc19ca2763f
-Block was generating for 0 seconds
-
-Block:
-Id: 4
-Timestamp: 1648038375255
-Magic number:559941836
-Hash of the previous block:
-4752a491306161aad693799737cf5a36dc12f75c278257232a738bc19ca2763f
-Hash of the block:
-79ff0938c09ff81ac08251b42e5cf0593e87331481392e6eb362a0ad83dc94ce
-Block was generating for 0 seconds
-
-Block:
-Id: 5
-Timestamp: 1648038375261
-Magic number:-822518362
-Hash of the previous block:
-79ff0938c09ff81ac08251b42e5cf0593e87331481392e6eb362a0ad83dc94ce
-Hash of the block:
-7ea18e933af024cefdb68a6225685266ef6d0dccb3b0d4f0b3fb296e37d48810
-Block was generating for 0 seconds
-?[1;31m
-Start test 2?[0m
-Enter how many zeros the hash must start with: 
-&gt; 1
-
-Block:
-Id: 1
-Timestamp: 1648038375282
-Magic number:-2056001231
-Hash of the previous block:
-0
-Hash of the block:
-0f0aa513dc5e690129f3a1f0424023554c8c46b11e4b4bfe7719d6b8fa1b29ef
-Block was generating for 0 seconds
-
-Block:
-Id: 2
-Timestamp: 1648038375292
-Magic number:456925542
-Hash of the previous block:
-0f0aa513dc5e690129f3a1f0424023554c8c46b11e4b4bfe7719d6b8fa1b29ef
-Hash of the block:
-02d288a6050588c0ac33a7f589a1354a5dba2a5a6518b7cfa3ae7cab56c12cbe
-Block was generating for 0 seconds
-
-Block:
-Id: 3
-Timestamp: 1648038375297
-Magic number:-1284122231
-Hash of the previous block:
-02d288a6050588c0ac33a7f589a1354a5dba2a5a6518b7cfa3ae7cab56c12cbe
-Hash of the block:
-05e6825648552d69392d52c2a41ba837b664795bceeadf4aea6a4915dfb24eff
-Block was generating for 0 seconds
-
-Block:
-Id: 4
-Timestamp: 1648038375302
-Magic number:-1671847254
-Hash of the previous block:
-05e6825648552d69392d52c2a41ba837b664795bceeadf4aea6a4915dfb24eff
-Hash of the block:
-09baa1f17e357d3165028fd7f82fd485e31986c350a8ce0734940b8c96b52f89
-Block was generating for 0 seconds
-
-Block:
-Id: 5
-Timestamp: 1648038375306
-Magic number:1851497725
-Hash of the previous block:
-09baa1f17e357d3165028fd7f82fd485e31986c350a8ce0734940b8c96b52f89
-Hash of the block:
-003846e21110072ccfd56d32c6df0f9c4d7f1019f8b1e4251f841ab0aaf70fe0
-Block was generating for 0 seconds
-?[1;31m
-Start test 3?[0m
-Enter how many zeros the hash must start with: 
-&gt; 2
-
-Block:
-Id: 1
-Timestamp: 1648038375317
-Magic number:-105012591
-Hash of the previous block:
-0
-Hash of the block:
-00f73ab11032f89cbec75c58f0cdf1511f7b7cfea8da938e62585fe41457cfc7
-Block was generating for 0 seconds
-
-Block:
-Id: 2
-Timestamp: 1648038375327
-Magic number:55604909
-Hash of the previous block:
-00f73ab11032f89cbec75c58f0cdf1511f7b7cfea8da938e62585fe41457cfc7
-Hash of the block:
-00bda4aba71474279536aacf9ade7bc622639a1befc33577922217eb63865cbd
-Block was generating for 0 seconds
-
-Block:
-Id: 3
-Timestamp: 1648038375346
-Magic number:-1886330436
-Hash of the previous block:
-00bda4aba71474279536aacf9ade7bc622639a1befc33577922217eb63865cbd
-Hash of the block:
-0088dfa321f06ceadfbcc8d21288b7c5b07ca919cb1e8d3e32f5eb9aeb1f3a54
-Block was generating for 0 seconds
-
-Block:
-Id: 4
-Timestamp: 1648038375353
-Magic number:1525343837
-Hash of the previous block:
-0088dfa321f06ceadfbcc8d21288b7c5b07ca919cb1e8d3e32f5eb9aeb1f3a54
-Hash of the block:
-002821bae6e6979db82517009b4fcdabc2417c538b15c02eafc8ec3ea46b709f
-Block was generating for 0 seconds
-
-Block:
-Id: 5
-Timestamp: 1648038375362
-Magic number:1953709560
-Hash of the previous block:
-002821bae6e6979db82517009b4fcdabc2417c538b15c02eafc8ec3ea46b709f
-Hash of the block:
-0057029b33d116ed39b154d52d72b78585be14147f2337037e750572c1f973dd
-Block was generating for 0 seconds
-?[1;31m
-Start test 4?[0m
-Enter how many zeros the hash must start with: 
-&gt; 0
-
-Block:
-Id: 1
-Timestamp: 1648038375376
-Magic number:1975121869
-Hash of the previous block:
-0
-Hash of the block:
-797e179505c4ca3dc70e68ae8d43cef9ef28454692566f96ffd6614ee509907d
-Block was generating for 0 seconds
-
-Block:
-Id: 2
-Timestamp: 1648038375382
-Magic number:620071908
-Hash of the previous block:
-797e179505c4ca3dc70e68ae8d43cef9ef28454692566f96ffd6614ee509907d
-Hash of the block:
-599c2c592a18251fbb5ca2ce124c7e0b5adcc61e296603a4637df75811e443f0
-Block was generating for 0 seconds
-
-Block:
-Id: 3
-Timestamp: 1648038375387
-Magic number:1938691659
-Hash of the previous block:
-599c2c592a18251fbb5ca2ce124c7e0b5adcc61e296603a4637df75811e443f0
-Hash of the block:
-d56e0a69bdc359fae95575653a0df0311f330bba49eb7bf1bb5214401c32aeff
-Block was generating for 0 seconds
-
-Block:
-Id: 4
-Timestamp: 1648038375391
-Magic number:-921062945
-Hash of the previous block:
-d56e0a69bdc359fae95575653a0df0311f330bba49eb7bf1bb5214401c32aeff
-Hash of the block:
-440f4e22c31aa5f83f1479133ad4e3b80910754a52bce43b466ae260a623d975
-Block was generating for 0 seconds
-
-Block:
-Id: 5
-Timestamp: 1648038375396
-Magic number:-635463472
-Hash of the previous block:
-440f4e22c31aa5f83f1479133ad4e3b80910754a52bce43b466ae260a623d975
-Hash of the block:
-79d347713ba6b91ab030cbce6d12613f48ef2bf2272987c4bb2089ba4d3d313a
-Block was generating for 0 seconds
-?[1;31m
-Start test 5?[0m
-Enter how many zeros the hash must start with: 
-&gt; 1
-
-Block:
-Id: 1
-Timestamp: 1648038375409
-Magic number:-1226513279
-Hash of the previous block:
-0
-Hash of the block:
-022c1b9aecc5cfb7f1a68b5d5de4870458bdff9dce0177efb91c19edd524f31a
-Block was generating for 0 seconds
-
-Block:
-Id: 2
-Timestamp: 1648038375416
-Magic number:-630427736
-Hash of the previous block:
-022c1b9aecc5cfb7f1a68b5d5de4870458bdff9dce0177efb91c19edd524f31a
-Hash of the block:
-04a3b1f777c15b76efaa1038501dc6227044ee5664ba214725d387188f4d1e3d
-Block was generating for 0 seconds
-
-Block:
-Id: 3
-Timestamp: 1648038375421
-Magic number:-2039829461
-Hash of the previous block:
-04a3b1f777c15b76efaa1038501dc6227044ee5664ba214725d387188f4d1e3d
-Hash of the block:
-0107831fc343215e32a8b69cfa8ccb26bf199c5d824072c2b404864472229146
-Block was generating for 0 seconds
-
-Block:
-Id: 4
-Timestamp: 1648038375426
-Magic number:1527483551
-Hash of the previous block:
-0107831fc343215e32a8b69cfa8ccb26bf199c5d824072c2b404864472229146
-Hash of the block:
-045e8a99478d5aa8b99298229395853f0cbf8ab5ddade370f87445577a637da0
-Block was generating for 0 seconds
-
-Block:
-Id: 5
-Timestamp: 1648038375430
-Magic number:-1181291557
-Hash of the previous block:
-045e8a99478d5aa8b99298229395853f0cbf8ab5ddade370f87445577a637da0
-Hash of the block:
-0c6a14e4736a2a11ea9096b0dce4d81d3687f54c5fa460346162529a02c30f50
-Block was generating for 0 seconds
-?[1;31m
-Start test 6?[0m
-Enter how many zeros the hash must start with: 
-&gt; 2
-
-Block:
-Id: 1
-Timestamp: 1648038375443
-Magic number:1023608183
-Hash of the previous block:
-0
-Hash of the block:
-004bc7a409edbec7bbc2be6318ef00fe7e9ffdbb63b7b701aa69697f8736a745
-Block was generating for 0 seconds
-
-Block:
-Id: 2
-Timestamp: 1648038375450
-Magic number:-465790761
-Hash of the previous block:
-004bc7a409edbec7bbc2be6318ef00fe7e9ffdbb63b7b701aa69697f8736a745
-Hash of the block:
-00f80a26264d9b055af824fae282f9faa3b2414eb60b4a8e4ff0ee5e5939ebd9
-Block was generating for 0 seconds
-
-Block:
-Id: 3
-Timestamp: 1648038375455
-Magic number:-57887126
-Hash of the previous block:
-00f80a26264d9b055af824fae282f9faa3b2414eb60b4a8e4ff0ee5e5939ebd9
-Hash of the block:
-00e07fccaee3b6d35e789328d783b40a830f25f6f9bf24bfbd2ce0f0aad3942d
-Block was generating for 0 seconds
-
-Block:
-Id: 4
-Timestamp: 1648038375459
-Magic number:-1578176596
-Hash of the previous block:
-00e07fccaee3b6d35e789328d783b40a830f25f6f9bf24bfbd2ce0f0aad3942d
-Hash of the block:
-00f1ae6b7c1bb5f39e8e2d15b5a093d0d6d3f571797f3fd61e7d7fc386c36588
-Block was generating for 0 seconds
-
-Block:
-Id: 5
-Timestamp: 1648038375463
-Magic number:-1804126822
-Hash of the previous block:
-00f1ae6b7c1bb5f39e8e2d15b5a093d0d6d3f571797f3fd61e7d7fc386c36588
-Hash of the block:
-0016adbcc3fda09d97ff8ae8393ab9ba7bbf003df9ee498083df9b2ab54c471f
-Block was generating for 0 seconds
 </pre>
 </span>
 </div>
@@ -422,7 +158,7 @@ Block was generating for 0 seconds
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.3.3</a> at 23 mar 2022, 13:26:15</p>
+<a href="http://www.gradle.org">Gradle 7.3.3</a> at 25 mar 2022, 10:10:50</p>
 </div>
 </div>
 </body>

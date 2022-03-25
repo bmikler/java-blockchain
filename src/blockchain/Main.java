@@ -1,19 +1,19 @@
 package blockchain;
 
-import blockchain.utils.FileService;
+import blockchain.mining.Miner;
+import blockchain.mining.MinerNumberGenerator;
 
 public class Main {
     public static void main(String[] args) {
 
         BlockChain blockChain = BlockChain.getInstance();
+        MinerNumberGenerator generator = new MinerNumberGenerator();
 
-        Miner miner = new Miner(blockChain);
-        Miner miner1 = new Miner(blockChain);
+        Miner miner = new Miner(generator, blockChain);
+        Miner miner1 = new Miner(generator, blockChain);
 
-        blockChain.addBlockToBlockChain(miner.generateNewBlock());
-        blockChain.addBlockToBlockChain((miner1.generateNewBlock()));
-
-        blockChain.print();
+        miner1.start();
+        miner.start();
 
     }
 }

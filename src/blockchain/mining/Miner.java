@@ -1,32 +1,40 @@
-package blockchain;
+package blockchain.mining;
 
+import blockchain.Block;
+import blockchain.BlockChain;
 import blockchain.utils.StringUtil;
 
 import java.util.Date;
 import java.util.Random;
 
-public class Miner {
+public class Miner extends Thread{
 
+    private final long id;
     private final BlockChain blockChain;
 
-    public Miner(BlockChain blockChain) {
+    public Miner(MinerNumberGenerator generator, BlockChain blockChain) {
+
+        this.id = generator.getNumber();
         this.blockChain = blockChain;
     }
 
-    public Block generateNewBlock() {
-        long id = blockChain.getLastBlock()
-                .map(block -> block.getId() + 1)
-                .orElse(1L);
+    @Override
+    public void run() {
+        while (blockChain.getBlockchain().size() < 6){
+            Block block = generateNewBlock();
+            blockChain.addBlockToBlockChain(block);
+        }
+    }
 
-        String hashPrevious = blockChain.getLastBlock()
-                .map(Block::getHashCurrent)
-                .orElse(String.valueOf(0));
+    public Block generateNewBlock() {
+        long id = blockChain.getLastId() + 1;
+        String hashPrevious = blockChain.getLastHash();
 
         long timeStamp = new Date().getTime();
 
         int magicNumber = findMagicNumber(id, timeStamp, hashPrevious);
 
-        return new Block(id, timeStamp, magicNumber, hashPrevious);
+        return new Block(id, this.id, timeStamp, magicNumber, hashPrevious);
     }
 
     private int findMagicNumber(long id, long timestamp, String hashPrevious) {

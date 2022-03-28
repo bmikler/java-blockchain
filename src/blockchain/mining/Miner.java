@@ -3,27 +3,25 @@ package blockchain.mining;
 import blockchain.Block;
 import blockchain.BlockChain;
 import blockchain.IncorectBlockException;
-import blockchain.utils.StringUtil;
-
-import java.util.Date;
-import java.util.Random;
 
 public class Miner extends Thread{
 
     private final long id;
     private final BlockChain blockChain;
+    private final Digger digger;
 
-    public Miner(MinerNumberGenerator generator, BlockChain blockChain) {
+    public Miner(MinerNumberGenerator generator, BlockChain blockChain, Digger digger) {
 
         this.id = generator.getNumber();
         this.blockChain = blockChain;
+        this.digger = digger;
     }
 
     @Override
     public void run() {
-        while (blockChain.getSize() < 100){
-            Block block = generateNewBlock();
+        while (blockChain.getSize() < 1000){
 
+            Block block = digger.generateNewBlock(blockChain, this.id);
             try {
                 blockChain.addBlockToBlockChain(block);
             } catch (IncorectBlockException e) {
@@ -31,34 +29,5 @@ public class Miner extends Thread{
             }
         }
     }
-
-    public Block generateNewBlock() {
-
-        long id;
-        long timeStamp;
-        int magicNumber;
-        String lastHash;
-
-        int zeroStart;
-
-        Random random = new Random();
-
-        String hashCurrent;
-
-        do {
-            id = blockChain.getLastId() + 1;
-            timeStamp = new Date().getTime();
-            magicNumber = random.nextInt();
-            lastHash = blockChain.getLastHash();
-
-            zeroStart = blockChain.getZeroStart();
-
-            hashCurrent = StringUtil.applySha256(id+ timeStamp + magicNumber + lastHash);
-
-        } while (!hashCurrent.startsWith("0".repeat(zeroStart)));
-
-        return new Block(id, this.id, timeStamp, magicNumber, lastHash);
-    }
-
 
 }

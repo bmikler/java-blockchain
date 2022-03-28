@@ -1,19 +1,23 @@
 package blockchain;
 
-import blockchain.mining.Miner;
+import blockchain.mining.DifficultyManager;
+import blockchain.mining.TimeCounter;
 import blockchain.utils.FileService;
-import blockchain.utils.StringUtil;
-
 import java.io.Serializable;
 import java.util.*;
 
 public class BlockChain implements Serializable {
-    private static final long serialVersionUID = 3812017177088226528L;
 
-    private static final BlockChain INSTANCE = FileService.loadBlockChain().orElse(new BlockChain());
-    private final List<Block> blockchain = new LinkedList<>();
-    private int zeroStart = 1;
-    private long timer = System.currentTimeMillis();
+    private static final BlockChain INSTANCE = FileService.loadBlockChain()
+            .orElse(new BlockChain(new ArrayList<>(), new DifficultyManager(30,5, new TimeCounter(), 0)));
+    private final List<Block> blockchain;
+    private final DifficultyManager difficultyManager;
+
+    public BlockChain(List<Block> blockchain, DifficultyManager difficultyManager) {
+        this.blockchain = blockchain;
+        this.difficultyManager = difficultyManager;
+    }
+
 
     public static BlockChain getInstance() {
         return INSTANCE;
@@ -23,8 +27,8 @@ public class BlockChain implements Serializable {
         return blockchain.size();
     }
 
-    public int getZeroStart() {
-        return zeroStart;
+    public int getDifficulty() {
+        return difficultyManager.getDifficult();
     }
 
     public synchronized void addBlockToBlockChain(Block block) {
@@ -36,32 +40,15 @@ public class BlockChain implements Serializable {
         blockchain.add(block);
         System.out.println(block);
 
-        long tmp = System.currentTimeMillis();
-        long time = (tmp - timer) / 1000;
-        System.out.println("Block was generating for " + time + " seconds");
+        difficultyManager.update();
 
-        if (time > 15){
-            zeroStart--;
-            System.out.println("N was decreased to " + zeroStart);
-        }
-
-        else if (time < 5) {
-            zeroStart++;
-            System.out.println("N was increased to " + zeroStart);
-        }
-
-        else {
-            System.out.println("N stays the same");
-        }
-
-        timer = tmp;
         save();
     }
 
     private Boolean isBlockValid(Block block) {
 
         return getLastHash().equals(block.getHashPrevious())
-                && block.getHashCurrent().startsWith("0".repeat(zeroStart));
+                && block.getHashCurrent().startsWith("0".repeat(getDifficulty()));
 
     }
 

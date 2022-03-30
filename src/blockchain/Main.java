@@ -8,9 +8,8 @@ import java.util.Set;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
-        BlockChain blockChain = BlockChain.getInstance();
+        BlockChain blockChain = BlockChainUtils.getInstance();
         MinerNumberGenerator generator = new MinerNumberGenerator();
-        DifficultyManager difficultyManager = new DifficultyManager(30,5, new TimeCounter(), 0);
 
         final int minerCounter = 50;
 

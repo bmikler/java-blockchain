@@ -1,30 +1,23 @@
 package blockchain;
 
 import blockchain.mining.DifficultyManager;
-import blockchain.mining.TimeCounter;
 import blockchain.utils.FileService;
+
 import java.io.Serializable;
-import java.util.*;
+import java.util.List;
 
 public class BlockChain implements Serializable {
 
-    private static final BlockChain INSTANCE = FileService.loadBlockChain()
-            .orElse(new BlockChain(new ArrayList<>(), new DifficultyManager(30,5, new TimeCounter(), 0)));
-    private final List<Block> blockchain;
+    private final List<Block> blockList;
     private final DifficultyManager difficultyManager;
 
-    private BlockChain(List<Block> blockchain, DifficultyManager difficultyManager) {
-        this.blockchain = blockchain;
+    public BlockChain(List<Block> blockchain, DifficultyManager difficultyManager) {
+        this.blockList = blockchain;
         this.difficultyManager = difficultyManager;
     }
 
-
-    public static BlockChain getInstance() {
-        return INSTANCE;
-    }
-
     public int getSize() {
-        return blockchain.size();
+        return blockList.size();
     }
 
     public int getDifficulty() {
@@ -37,12 +30,12 @@ public class BlockChain implements Serializable {
             throw new IncorectBlockException();
         }
 
-        blockchain.add(block);
+        blockList.add(block);
         System.out.println(block);
 
         difficultyManager.update();
 
-        save();
+        FileService.saveBlockchain(this);
     }
 
     private Boolean isBlockValid(Block block) {
@@ -52,24 +45,20 @@ public class BlockChain implements Serializable {
 
     }
 
-    private void save() {
-        FileService.saveBlockchain(INSTANCE);
-    }
-
     public String getLastHash() {
 
-        if(blockchain.isEmpty()){
+        if(blockList.isEmpty()){
             return String.valueOf(0);
         }
-        return blockchain.get(blockchain.size() - 1).getHashCurrent();
+        return blockList.get(blockList.size() - 1).getHashCurrent();
 
     }
 
     public long getLastId() {
-        if(blockchain.isEmpty()){
+        if(blockList.isEmpty()){
             return 0L;
         }
-        return blockchain.get(blockchain.size() - 1).getId();
+        return blockList.get(blockList.size() - 1).getId();
     }
 
 }

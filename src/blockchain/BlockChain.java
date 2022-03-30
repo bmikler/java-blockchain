@@ -13,7 +13,7 @@ public class BlockChain implements Serializable {
     private final List<Block> blockchain;
     private final DifficultyManager difficultyManager;
 
-    public BlockChain(List<Block> blockchain, DifficultyManager difficultyManager) {
+    private BlockChain(List<Block> blockchain, DifficultyManager difficultyManager) {
         this.blockchain = blockchain;
         this.difficultyManager = difficultyManager;
     }

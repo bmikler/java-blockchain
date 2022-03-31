@@ -9,20 +9,37 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class BlockChainTest {
 
     private BlockChain blockChain;
+    private DifficultyManager difficultyManager;
 
     @Before
     public void init() {
-        DifficultyManager difficultyManager = mock(DifficultyManager.class);
+        difficultyManager = mock(DifficultyManager.class);
         blockChain = new BlockChain(new ArrayList<>(), difficultyManager);
     }
 
     //TODO
     //test add block to blockchain valid or not, with full or empty blockchain
     //check if difficulty manger update and file service save
+    @Test(expected = IncorectBlockException.class)
+    public void testWrongIDBlockToEmptyBlockChain() {
+        when(difficultyManager.getDifficult()).thenReturn(0);
+        Block block = new Block(2L, 1L, new Date().getTime(), 5, "0");
+        blockChain.addBlockToBlockChain(block);
+
+    }
+
+    @Test(expected = IncorectBlockException.class)
+    public void testWrongHashPreviousBlockToEmptyBlockChain() {
+        when(difficultyManager.getDifficult()).thenReturn(0);
+        Block block = new Block(1L, 1L, new Date().getTime(), 5, "xx");
+        blockChain.addBlockToBlockChain(block);
+
+    }
 
 
     @Test

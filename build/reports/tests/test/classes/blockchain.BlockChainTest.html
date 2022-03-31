@@ -23,13 +23,13 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">4</div>
+<div class="counter">1</div>
 <p>tests</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">0</div>
+<div class="counter">1</div>
 <p>failures</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.572s</div>
+<div class="counter">0.372s</div>
 <p>duration</p>
 </div>
 </td>
@@ -50,8 +50,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox success" id="successRate">
-<div class="percent">100%</div>
+<div class="infoBox failures" id="successRate">
+<div class="percent">0%</div>
 <p>successful</p>
 </div>
 </td>
@@ -61,92 +61,26 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Tests</a>
+<a href="#tab0">Failed tests</a>
 </li>
 <li>
-<a href="#tab1">Standard output</a>
+<a href="#tab1">Tests</a>
 </li>
 <li>
-<a href="#tab2">Standard error</a>
+<a href="#tab2">Standard output</a>
+</li>
+<li>
+<a href="#tab3">Standard error</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
-<h2>Tests</h2>
-<table>
-<thead>
-<tr>
-<th>Test</th>
-<th>Duration</th>
-<th>Result</th>
-</tr>
-</thead>
-<tr>
-<td class="success">testGetLasIdtWithNotEmptyBlockChain</td>
-<td class="success">0.006s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testGetLastHashEmptyBlockChain</td>
-<td class="success">0s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testGetLastHashWithNotEmptyBlockChain</td>
-<td class="success">0.566s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testGetLastIdEmptyBlockChain</td>
-<td class="success">0s</td>
-<td class="success">passed</td>
-</tr>
-</table>
-</div>
-<div id="tab1" class="tab">
-<h2>Standard output</h2>
+<h2>Failed tests</h2>
+<div class="test">
+<a name="testWrongHashPreviousBlockToEmptyBlockChain"></a>
+<h3 class="failures">testWrongHashPreviousBlockToEmptyBlockChain</h3>
 <span class="code">
-<pre>
-Block:
-Created by miner # 1
-Id: 1
-Timestamp: 1648665409206
-Magic number:1
-Hash of the previous block:
-0
-Hash of the block:
-eef14b34eb764e1f1060c71d9b005044001216ba3c419503ef8f7c8c96806dea
-
-Block:
-Created by miner # 1
-Id: 1
-Timestamp: 1648665409251
-Magic number:1
-Hash of the previous block:
-0
-Hash of the block:
-d5ebb0703ad15773572cb957abd8a6eede1f1fd6d139e065739ebb75ac0a947e
-</pre>
-</span>
-</div>
-<div id="tab2" class="tab">
-<h2>Standard error</h2>
-<span class="code">
-<pre>java.io.FileNotFoundException: ./Blockchain/task/files/blockchain.obj (Nie ma takiego pliku ani katalogu)
-	at java.base/java.io.FileOutputStream.open0(Native Method)
-	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:293)
-	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:235)
-	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:123)
-	at blockchain.utils.FileService.saveBlockchain(FileService.java:39)
-	at blockchain.BlockChain.addBlockToBlockChain(BlockChain.java:38)
-	at blockchain.BlockChainTest.testGetLastHashWithNotEmptyBlockChain(BlockChainTest.java:37)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+<pre>java.lang.AssertionError: Expected exception: blockchain.IncorectBlockException
+	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:32)
 	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
 	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
 	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
@@ -180,14 +114,54 @@ d5ebb0703ad15773572cb957abd8a6eede1f1fd6d139e065739ebb75ac0a947e
 	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
-java.io.FileNotFoundException: ./Blockchain/task/files/blockchain.obj (Nie ma takiego pliku ani katalogu)
+</pre>
+</span>
+</div>
+</div>
+<div id="tab1" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="failures">testWrongHashPreviousBlockToEmptyBlockChain</td>
+<td class="failures">0.372s</td>
+<td class="failures">failed</td>
+</tr>
+</table>
+</div>
+<div id="tab2" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>
+Block:
+Created by miner # 1
+Id: 1
+Timestamp: 1648751039851
+Magic number:5
+Hash of the previous block:
+0
+Hash of the block:
+a240727b44895d02de63a2bff26896eedbb43090437c75b8d193d40f87305d9b
+</pre>
+</span>
+</div>
+<div id="tab3" class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>java.io.FileNotFoundException: ./Blockchain/task/files/blockchain.obj (Nie ma takiego pliku ani katalogu)
 	at java.base/java.io.FileOutputStream.open0(Native Method)
 	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:293)
 	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:235)
 	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:123)
 	at blockchain.utils.FileService.saveBlockchain(FileService.java:39)
 	at blockchain.BlockChain.addBlockToBlockChain(BlockChain.java:38)
-	at blockchain.BlockChainTest.testGetLasIdtWithNotEmptyBlockChain(BlockChainTest.java:60)
+	at blockchain.BlockChainTest.testWrongHashPreviousBlockToEmptyBlockChain(BlockChainTest.java:40)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -196,6 +170,7 @@ java.io.FileNotFoundException: ./Blockchain/task/files/blockchain.obj (Nie ma ta
 	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
 	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
 	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:19)
 	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
 	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
 	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
@@ -240,7 +215,7 @@ java.io.FileNotFoundException: ./Blockchain/task/files/blockchain.obj (Nie ma ta
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.3.3</a> at 30 mar 2022, 20:36:49</p>
+<a href="http://www.gradle.org">Gradle 7.3.3</a> at 31 mar 2022, 20:23:59</p>
 </div>
 </div>
 </body>

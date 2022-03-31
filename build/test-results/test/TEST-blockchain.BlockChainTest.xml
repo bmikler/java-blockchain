@@ -1,47 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="blockchain.BlockChainTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-03-30T18:36:48" hostname="bm" time="0.573">
+<testsuite name="blockchain.BlockChainTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-03-31T18:23:59" hostname="bm" time="0.372">
   <properties/>
-  <testcase name="testGetLastHashWithNotEmptyBlockChain" classname="blockchain.BlockChainTest" time="0.566"/>
-  <testcase name="testGetLastHashEmptyBlockChain" classname="blockchain.BlockChainTest" time="0.0"/>
-  <testcase name="testGetLastIdEmptyBlockChain" classname="blockchain.BlockChainTest" time="0.0"/>
-  <testcase name="testGetLasIdtWithNotEmptyBlockChain" classname="blockchain.BlockChainTest" time="0.006"/>
-  <system-out><![CDATA[
-Block:
-Created by miner # 1
-Id: 1
-Timestamp: 1648665409206
-Magic number:1
-Hash of the previous block:
-0
-Hash of the block:
-eef14b34eb764e1f1060c71d9b005044001216ba3c419503ef8f7c8c96806dea
-
-Block:
-Created by miner # 1
-Id: 1
-Timestamp: 1648665409251
-Magic number:1
-Hash of the previous block:
-0
-Hash of the block:
-d5ebb0703ad15773572cb957abd8a6eede1f1fd6d139e065739ebb75ac0a947e
-]]></system-out>
-  <system-err><![CDATA[java.io.FileNotFoundException: ./Blockchain/task/files/blockchain.obj (Nie ma takiego pliku ani katalogu)
-	at java.base/java.io.FileOutputStream.open0(Native Method)
-	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:293)
-	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:235)
-	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:123)
-	at blockchain.utils.FileService.saveBlockchain(FileService.java:39)
-	at blockchain.BlockChain.addBlockToBlockChain(BlockChain.java:38)
-	at blockchain.BlockChainTest.testGetLastHashWithNotEmptyBlockChain(BlockChainTest.java:37)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+  <testcase name="testWrongHashPreviousBlockToEmptyBlockChain" classname="blockchain.BlockChainTest" time="0.372">
+    <failure message="java.lang.AssertionError: Expected exception: blockchain.IncorectBlockException" type="java.lang.AssertionError">java.lang.AssertionError: Expected exception: blockchain.IncorectBlockException
+	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:32)
 	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
 	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
 	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
@@ -75,14 +37,27 @@ d5ebb0703ad15773572cb957abd8a6eede1f1fd6d139e065739ebb75ac0a947e
 	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
-java.io.FileNotFoundException: ./Blockchain/task/files/blockchain.obj (Nie ma takiego pliku ani katalogu)
+</failure>
+  </testcase>
+  <system-out><![CDATA[
+Block:
+Created by miner # 1
+Id: 1
+Timestamp: 1648751039851
+Magic number:5
+Hash of the previous block:
+0
+Hash of the block:
+a240727b44895d02de63a2bff26896eedbb43090437c75b8d193d40f87305d9b
+]]></system-out>
+  <system-err><![CDATA[java.io.FileNotFoundException: ./Blockchain/task/files/blockchain.obj (Nie ma takiego pliku ani katalogu)
 	at java.base/java.io.FileOutputStream.open0(Native Method)
 	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:293)
 	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:235)
 	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:123)
 	at blockchain.utils.FileService.saveBlockchain(FileService.java:39)
 	at blockchain.BlockChain.addBlockToBlockChain(BlockChain.java:38)
-	at blockchain.BlockChainTest.testGetLasIdtWithNotEmptyBlockChain(BlockChainTest.java:60)
+	at blockchain.BlockChainTest.testWrongHashPreviousBlockToEmptyBlockChain(BlockChainTest.java:40)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -91,6 +66,7 @@ java.io.FileNotFoundException: ./Blockchain/task/files/blockchain.obj (Nie ma ta
 	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
 	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
 	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:19)
 	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
 	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
 	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)

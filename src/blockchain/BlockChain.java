@@ -41,7 +41,7 @@ public class BlockChain implements Serializable {
     private Boolean isBlockValid(Block block) {
 
         return getLastHash().equals(block.getHashPrevious())
-                && block.getHashCurrent().startsWith("0".repeat(getDifficulty()));
+                && block.getHashCurrent().startsWith("0".repeat(getDifficulty())) && block.getId() == getLastId() + 1;
 
     }
 

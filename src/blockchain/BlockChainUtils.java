@@ -15,7 +15,7 @@ public class BlockChainUtils {
                 .orElse(new BlockChain(
                         new ArrayList<>(),
                         new DifficultyManager(30,5, new TimeCounter(),
-                                0))
+                                5))
                 );
     }
 

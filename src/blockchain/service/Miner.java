@@ -31,8 +31,7 @@ public class Miner implements Runnable{
             } else {
                 break;
             }
-
-
+            
         }
 
     }

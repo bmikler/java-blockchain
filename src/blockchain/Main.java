@@ -1,29 +1,55 @@
 package blockchain;
 
-import blockchain.mining.*;
+import blockchain.chat.Client;
+import blockchain.chat.MessageGenerator;
+import blockchain.chat.MessagesCache;
+import blockchain.model.Blockchain;
+import blockchain.service.*;
+import blockchain.util.FileManager;
+import blockchain.util.Printer;
+import blockchain.util.TimeCounter;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Main {
+
+    private final static int MINER_NUMBER = 10;
+
     public static void main(String[] args) throws InterruptedException {
 
-        BlockChain blockChain = BlockChainUtils.getInstance();
-        MinerNumberGenerator generator = new MinerNumberGenerator();
+        FileManager fileManager = new FileManager();
+        MessagesCache messagesCache = new MessagesCache(new ArrayList<>());
+        Blockchain blockchain = fileManager.loadBlockchain().orElse(new Blockchain(new ArrayList<>()));
+        //Blockchain blockchain = new Blockchain(new ArrayList<>());
 
-        final int minerCounter = 50;
+        int difficulty = blockchain.getDifficulty();
 
-        Set<Miner> miners = new HashSet<>();
+        BlockchainService blockchainService = new BlockchainService(blockchain, new Validator(), new Printer(), new DifficultyService(difficulty),messagesCache, fileManager);
+        Random random = new Random();
 
-        for (int i = 0; i < minerCounter; i++) {
-            miners.add(new Miner(generator, blockChain, new Digger()));
+        List<Thread> miners = new ArrayList<>();
+
+        for (int i = 0; i < MINER_NUMBER; i++) {
+
+            Digger digger = new Digger(blockchainService, new TimeCounter(), random);
+            Miner miner = new Miner(i, blockchainService, digger);
+
+            miners.add(new Thread(miner));
         }
 
-        for(Miner miner : miners) {
-            miner.start();
+        Client client = new Client(blockchainService, new MessageGenerator(), messagesCache);
+        Thread clientThread = new Thread(client);
+
+        for (var m : miners) {
+            m.setPriority(1);
+            m.start();
         }
 
-        Thread.sleep(5000);
+        clientThread.setPriority(1);
+        clientThread.start();
+
 
 
     }

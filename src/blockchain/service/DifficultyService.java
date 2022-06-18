@@ -18,6 +18,11 @@ public class DifficultyService {
 
         else if (generationTime < 10) {
             difficulty++;
+
+            if (difficulty > 5) {
+                difficulty = 5;
+            }
+
             return INCREASE;
         }
 

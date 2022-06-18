@@ -21,11 +21,18 @@ public class Miner implements Runnable{
 
         while (true) {
             Block newBlock = digger.generateNextBlock();
-            try {
-                blockchainService.addNewBlock(newBlock, id);
-            } catch (RuntimeException e) {
-                System.err.println("Miner # " + id + " - " + e.getMessage());
+
+            if (blockchainService.getLength() < i) {
+                try {
+                    blockchainService.addNewBlock(newBlock, id);
+                } catch (RuntimeException e) {
+                    System.err.println("Miner # " + id + " - " + e.getMessage());
+                }
+            } else {
+                break;
             }
+
+
         }
 
     }

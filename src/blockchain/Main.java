@@ -47,7 +47,7 @@ public class Main {
             m.start();
         }
 
-        clientThread.setPriority(1);
+        clientThread.setPriority(10);
         clientThread.start();
 
 

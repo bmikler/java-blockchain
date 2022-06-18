@@ -19,15 +19,15 @@ public class Client implements Runnable{
 
         int i = blockchainService.getLength() + 5;
 
-        while (true) {
+        while (blockchainService.getLength() < i) {
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(200);
                 } catch (InterruptedException e) {
                     //e.printStackTrace();
                 }
 
                 Message randomMessage = messageGenerator.getRandomMessage();
-                System.err.println(randomMessage);
+                //System.err.println(randomMessage);
                 messagesCache.addMessage(randomMessage);
             }
 

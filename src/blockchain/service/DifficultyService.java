@@ -4,9 +4,11 @@ import static blockchain.service.DifficultyServiceOperation.*;
 
 public class DifficultyService {
 
+    private final int maxDifficulty;
     private int difficulty;
 
-    public DifficultyService(int difficulty) {
+    public DifficultyService(int maxDifficulty, int difficulty) {
+        this.maxDifficulty = maxDifficulty;
         this.difficulty = difficulty;
     }
 
@@ -19,8 +21,8 @@ public class DifficultyService {
         else if (generationTime < 10) {
             difficulty++;
 
-            if (difficulty > 5) {
-                difficulty = 5;
+            if (difficulty > maxDifficulty) {
+                difficulty = maxDifficulty;
             }
 
             return INCREASE;

@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class FileManager {
 
-    private final static String FILENAME = "data";
+    private final static String FILENAME = "blockchain";
 
     public void saveBlockchain(Blockchain blockchain) {
         try(

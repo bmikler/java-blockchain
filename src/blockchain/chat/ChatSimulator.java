@@ -2,16 +2,18 @@ package blockchain.chat;
 
 import blockchain.service.BlockchainService;
 
-public class Client implements Runnable{
+public class ChatSimulator implements Runnable{
 
     private final BlockchainService blockchainService;
     private final MessageGenerator messageGenerator;
     private final MessagesCache messagesCache;
+    private final int timeInterval;
 
-    public Client(BlockchainService blockchainService, MessageGenerator messageGenerator, MessagesCache messagesCache) {
+    public ChatSimulator(BlockchainService blockchainService, MessageGenerator messageGenerator, MessagesCache messagesCache, int timeInterval) {
         this.blockchainService = blockchainService;
         this.messageGenerator = messageGenerator;
         this.messagesCache = messagesCache;
+        this.timeInterval = timeInterval;
     }
 
     @Override
@@ -23,7 +25,7 @@ public class Client implements Runnable{
                 try {
                     Thread.sleep(200);
                 } catch (InterruptedException e) {
-                    //e.printStackTrace();
+                    e.printStackTrace();
                 }
 
                 Message randomMessage = messageGenerator.getRandomMessage();
